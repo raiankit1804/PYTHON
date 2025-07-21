@@ -1,0 +1,17 @@
+def is_right_triangle_with_even_sides(a: int, b: int, c: int) -> bool:
+    '''
+    Given three side lengths in increasing order (a <= b <= c),
+    checks if they form a right triangle with both perpendicular sides even.
+    
+    Arguments:
+    a: int - the first side length
+    b: int - the second side length
+    c: int - the hypotenuse length
+
+    Returns:
+    bool - True if right triangle with even perpendicular sides, else False
+    '''
+    is_right_triangle = a**2 + b**2 == c**2
+    are_perpendiculars_even = a % 2 == 0 and b % 2 == 0
+    
+    return is_right_triangle and are_perpendiculars_even
