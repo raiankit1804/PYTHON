@@ -1,0 +1,29 @@
+def courses_sorted_by_enrollment(student_courses: dict) -> list:
+    '''
+    Given a dictionary of student roll numbers 
+    with the list of courses they chose, 
+    find the courses sorted from the 
+    most number of enrollments to the least.
+
+    Args:
+    student_courses (dict): 
+        a dictionary where keys are student roll numbers and 
+        values are lists of courses they chose
+
+    Returns:
+    list: 
+        a list of courses sorted by the number of students enrolled 
+        in descending order
+    '''
+    from collections import Counter
+
+    # Collect all courses from all students
+    all_courses = []
+    for courses in student_courses.values():
+        all_courses.extend(courses)
+
+    course_counts = Counter(all_courses)
+    
+    # Sort courses by count (most to least)
+    sorted_courses = [course for course, count in course_counts.most_common()]
+    return sorted_courses
