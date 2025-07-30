@@ -1,0 +1,31 @@
+def num_to_words(matrix):
+    # Mapping for 0 to 99 as words
+    ones = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+    tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+
+    def num_to_word(n):
+        if 0 <= n < 10:
+            return ones[n]
+        elif 10 <= n < 20:
+            return teens[n-10]
+        elif 20 <= n < 100:
+            if n % 10 == 0:
+                return tens[n//10]
+            else:
+                return tens[n//10] + '-' + ones[n%10]
+        else:
+            raise ValueError("Only numbers 0-99 are allowed.")
+
+    lines = []
+    for row in matrix:
+        word_row = [num_to_word(num) for num in row]
+        lines.append(",".join(word_row))
+
+    # Write to words.csv ensuring no \n on the last line
+    with open('words.csv', 'w') as f:
+        for i in range(len(lines)):
+            if i < len(lines) - 1:
+                f.write(lines[i] + '\n')
+            else:
+                f.write(lines[i])
