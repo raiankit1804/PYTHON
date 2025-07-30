@@ -1,0 +1,20 @@
+def get_goals(filename, country):
+    num_players = 0
+    num_goals = 0
+    found = False
+    with open(filename, 'r') as f:
+        # Skip the header line
+        next(f)
+        for line in f:
+            # Remove any leading/trailing spaces and split by comma
+            parts = line.strip().split(',')
+            if len(parts) < 3:
+                continue  # skip malformed lines
+            player_country = parts[1].strip()
+            if player_country == country:
+                found = True
+                num_players += 1
+                num_goals += int(parts[2].strip())
+    if not found:
+        return (-1, -1)
+    return (num_players, num_goals)
