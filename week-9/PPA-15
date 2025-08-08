@@ -1,0 +1,32 @@
+def subset_sum(L, s):
+    """
+    Recursively determines if there exists a subset of L that sums to s.
+    
+    Args:
+        L: A list of positive integers representing coin values
+        s: A positive integer representing the target sum
+    
+    Returns:
+        True if a subset of L sums to s, False otherwise
+    """
+    # Base case: if target sum is 0, we can always achieve it with empty subset
+    if s == 0:
+        return True
+    
+    # Base case: if list is empty but target sum is positive, impossible
+    if len(L) == 0:
+        return False
+    
+    # Base case: if target sum is negative, impossible (since all coins are positive)
+    if s < 0:
+        return False
+    
+    # Recursive case: we have two choices for the first element L[0]
+    # Choice 1: Include L[0] in our subset
+    include_first = subset_sum(L[1:], s - L[0])
+    
+    # Choice 2: Exclude L[0] from our subset
+    exclude_first = subset_sum(L[1:], s)
+    
+    # Return True if either choice leads to a solution
+    return include_first or exclude_first
