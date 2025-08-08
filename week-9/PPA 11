@@ -1,0 +1,43 @@
+def insert(L, x):
+    """
+    Inserts element x into sorted list L at the correct position.
+    
+    Args:
+        L: A sorted list of integers
+        x: An integer to be inserted
+    
+    Returns:
+        A new sorted list with x inserted at the correct position
+    """
+    result = []
+    inserted = False
+    
+    for i in range(len(L)):
+        if not inserted and x <= L[i]:
+            result.append(x)
+            inserted = True
+        result.append(L[i])
+    
+    # If x is greater than all elements in L, append it at the end
+    if not inserted:
+        result.append(x)
+    
+    return result
+
+def isort(L):
+    """
+    Recursively sorts a list using insertion sort algorithm.
+    
+    Args:
+        L: A non-empty list of integers
+    
+    Returns:
+        A sorted list in ascending order
+    """
+    # Base case: if list has only one element, it's already sorted
+    if len(L) == 1:
+        return L
+    
+    # Recursive case: sort the first n-1 elements, then insert the last element
+    sorted_sublist = isort(L[:-1])
+    return insert(sorted_sublist, L[-1])
