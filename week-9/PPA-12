@@ -1,0 +1,18 @@
+def poly(L, x_0):
+    """
+    Recursively evaluates a polynomial at a given value x_0.
+    
+    Args:
+        L: A list of coefficients [a_0, a_1, a_2, ..., a_n]
+        x_0: The value at which to evaluate the polynomial
+    
+    Returns:
+        The value of the polynomial evaluated at x_0
+    """
+    # Base case: if only one coefficient remains, return a_0 * x_0^0 = a_0
+    if len(L) == 1:
+        return L[0]
+    
+    # Recursive case: a_0 + x_0 * (a_1 + a_2*x_0 + a_3*x_0^2 + ...)
+    # This is equivalent to a_0 + x_0 * poly(L[1:], x_0)
+    return L[0] + x_0 * poly(L[1:], x_0)
