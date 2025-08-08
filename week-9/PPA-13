@@ -1,0 +1,37 @@
+def power(A, m):
+    """
+    Recursively computes A^m where A is a square matrix and m is a positive integer.
+    
+    Args:
+        A: A square matrix represented as a list of lists
+        m: A positive integer (the power)
+    
+    Returns:
+        A^m as a matrix (list of lists)
+    """
+    # Base case: A^1 = A
+    if m == 1:
+        return A
+    
+    # Recursive case: A^m = A * A^(m-1)
+    return matrix_multiply(A, power(A, m - 1))
+
+def matrix_multiply(A, B):
+    """
+    Helper function to multiply two square matrices.
+    
+    Args:
+        A, B: Square matrices represented as lists of lists
+    
+    Returns:
+        The product A * B as a matrix
+    """
+    n = len(A)  # Size of the square matrix
+    result = [[0 for _ in range(n)] for _ in range(n)]
+    
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                result[i][j] += A[i][k] * B[k][j]
+    
+    return result
