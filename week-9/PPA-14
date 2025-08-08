@@ -1,0 +1,53 @@
+def det(M):
+    """
+    Recursively computes the determinant of a square matrix.
+    
+    Args:
+        M: A square matrix represented as a list of lists
+    
+    Returns:
+        The determinant of the matrix
+    """
+    n = len(M)
+    
+    # Base case: 1x1 matrix
+    if n == 1:
+        return M[0][0]
+    
+    # Base case: 2x2 matrix
+    if n == 2:
+        return M[0][0] * M[1][1] - M[0][1] * M[1][0]
+    
+    # Recursive case: expand along the first row
+    determinant = 0
+    for j in range(n):
+        # Calculate cofactor: (-1)^j * M[0][j] * minor determinant
+        cofactor = ((-1) ** j) * M[0][j] * det(minor_matrix(M, 0, j))
+        determinant += cofactor
+    
+    return determinant
+
+def minor_matrix(M, row, col):
+    """
+    Creates a minor matrix by removing the specified row and column.
+    
+    Args:
+        M: The original square matrix
+        row: The row index to remove
+        col: The column index to remove
+    
+    Returns:
+        A new matrix with the specified row and column removed
+    """
+    n = len(M)
+    minor = []
+    
+    for i in range(n):
+        if i != row:  # Skip the specified row
+            new_row = []
+            for j in range(n):
+                if j != col:  # Skip the specified column
+                    new_row.append(M[i][j])
+            minor.append(new_row)
+    
+    return minor
